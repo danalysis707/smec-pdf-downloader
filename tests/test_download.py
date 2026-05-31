@@ -128,3 +128,5 @@ def test_build_download_plan_entry_structure():
     assert url.startswith("https://")
     assert url.endswith(".pdf")
     assert isinstance(dest, Path)
+    # ファイル名の先頭にフォルダ名（年度）が付いていること
+    assert dest.name.startswith(year_label + "_")

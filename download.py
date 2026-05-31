@@ -95,8 +95,8 @@ def build_download_plan():
         for subject, answer_letter, question_letter in SUBJECTS:
             q_url = build_question_url(ryear, cyear, question_letter)
             a_url = build_answer_url(ryear, cyear, answer_letter)
-            q_dest = OUTPUT_DIR / year_label / f"{subject}_問題.pdf"
-            a_dest = OUTPUT_DIR / year_label / f"{subject}_解答.pdf"
+            q_dest = OUTPUT_DIR / year_label / f"{year_label}_{subject}_問題.pdf"
+            a_dest = OUTPUT_DIR / year_label / f"{year_label}_{subject}_解答.pdf"
             plan.append((year_label, subject, "問題", q_url, q_dest))
             plan.append((year_label, subject, "解答", a_url, a_dest))
     return plan
