@@ -10,9 +10,33 @@ def test_build_answer_url():
     assert url == "https://www.jf-cmca.jp/attach/test/r03/1j_seikai/2021a.pdf"
 
 
+def test_build_answer_url_r03_g_teisei():
+    # 令和3年度 中小企業経営・中小企業政策 は訂正版ファイル名
+    url = build_answer_url(ryear="r03", cyear="2021", letter="g")
+    assert url == "https://www.jf-cmca.jp/attach/test/r03/1j_seikai/2021g_teisei.pdf"
+
+
 def test_build_answer_url_r05():
+    # 令和5年度は再試験フォルダ・年号なし・大文字
     url = build_answer_url(ryear="r05", cyear="2023", letter="b")
-    assert url == "https://www.jf-cmca.jp/attach/test/r05/1j_seikai/2023b.pdf"
+    assert url == "https://www.jf-cmca.jp/attach/test/r05/1ji(sai)_seikai/B.pdf"
+
+
+def test_build_answer_url_r06_d_override():
+    # 令和6年度 運営管理 は訂正版ファイル名
+    url = build_answer_url(ryear="r06", cyear="2024", letter="d")
+    assert url == "https://www.jf-cmca.jp/attach/test/r06/1ji_seikai/Dv2_20240903.pdf"
+
+
+def test_build_answer_url_r07():
+    url = build_answer_url(ryear="r07", cyear="2025", letter="a")
+    assert url == "https://www.jf-cmca.jp/attach/test/r07/1ji_seikai/2025a.pdf"
+
+
+def test_build_answer_url_r07_d_override():
+    # 令和7年度 運営管理 は訂正版ファイル名
+    url = build_answer_url(ryear="r07", cyear="2025", letter="d")
+    assert url == "https://www.jf-cmca.jp/attach/test/r07/1ji_seikai/d_v2_20250902.pdf"
 
 
 def test_build_question_url_r02_lowercase():
@@ -23,6 +47,11 @@ def test_build_question_url_r02_lowercase():
 def test_build_question_url_r05_uppercase():
     url = build_question_url(ryear="r05", cyear="2023", letter="A")
     assert url == "https://www.jf-cmca.jp/attach/test/shikenmondai/1ji2023/A1JI2023.pdf"
+
+
+def test_build_question_url_r07():
+    url = build_question_url(ryear="r07", cyear="2025", letter="A")
+    assert url == "https://www.jf-cmca.jp/attach/test/shikenmondai/1ji2025/A1JI2025.pdf"
 
 
 def test_download_pdf_success(tmp_path):
@@ -88,8 +117,8 @@ def test_download_pdf_connection_error(tmp_path):
 
 def test_build_download_plan_count():
     plan = build_download_plan()
-    # 5年度 × 7科目 × 2種類（問題・解答）= 70件
-    assert len(plan) == 70
+    # 6年度 × 7科目 × 2種類（問題・解答）= 84件
+    assert len(plan) == 84
 
 
 def test_build_download_plan_entry_structure():

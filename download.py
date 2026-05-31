@@ -12,6 +12,7 @@ YEARS = [
     ("r04", "2022", "令和4年度"),
     ("r05", "2023", "令和5年度"),
     ("r06", "2024", "令和6年度"),
+    ("r07", "2025", "令和7年度"),
 ]
 
 SUBJECTS = [
@@ -26,11 +27,42 @@ SUBJECTS = [
 
 OUTPUT_DIR = Path("downloads")
 
-QUESTION_JI_MAP = {"r02": "ji", "r03": "ji", "r04": "ji", "r05": "JI", "r06": "JI"}
+QUESTION_JI_MAP = {
+    "r02": "ji", "r03": "ji", "r04": "ji",
+    "r05": "JI", "r06": "JI", "r07": "JI",
+}
+
+# 年度ごとの解答PDFフォルダ名
+ANSWER_SUBDIR = {
+    "r02": "1j_seikai",
+    "r03": "1j_seikai",
+    "r04": "1j_seikai",
+    "r05": "1ji(sai)_seikai",  # 令和5年度は再試験フォルダ
+    "r06": "1ji_seikai",
+    "r07": "1ji_seikai",
+}
+
+# 標準パターン（{cyear}{letter}.pdf）から外れるファイル名の上書き
+ANSWER_FILENAME_OVERRIDES = {
+    ("r03", "g"): "2021g_teisei.pdf",   # 令和3年度 中小企業経営：訂正版
+    ("r05", "a"): "A.pdf",              # 令和5年度は年号なし大文字
+    ("r05", "b"): "B.pdf",
+    ("r05", "c"): "C.pdf",
+    ("r05", "d"): "D.pdf",
+    ("r05", "e"): "E.pdf",
+    ("r05", "f"): "F.pdf",
+    ("r05", "g"): "G.pdf",
+    ("r06", "d"): "Dv2_20240903.pdf",  # 令和6年度 運営管理：訂正版
+    ("r06", "f"): "Fv2_20240903.pdf",  # 令和6年度 経営情報システム：訂正版
+    ("r07", "d"): "d_v2_20250902.pdf", # 令和7年度 運営管理：訂正版
+    ("r07", "f"): "f_v2_20250902.pdf", # 令和7年度 経営情報システム：訂正版
+}
 
 
 def build_answer_url(ryear: str, cyear: str, letter: str) -> str:
-    return f"{BASE_URL}/attach/test/{ryear}/1j_seikai/{cyear}{letter}.pdf"
+    subdir = ANSWER_SUBDIR[ryear]
+    filename = ANSWER_FILENAME_OVERRIDES.get((ryear, letter), f"{cyear}{letter}.pdf")
+    return f"{BASE_URL}/attach/test/{ryear}/{subdir}/{filename}"
 
 
 def build_question_url(ryear: str, cyear: str, letter: str) -> str:
