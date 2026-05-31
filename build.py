@@ -35,7 +35,7 @@ def convert_pdf_to_images(pdf_path: Path, output_dir: Path) -> list[Path]:
         if not image_path.exists():
             page = doc[page_num]
             pix = page.get_pixmap(matrix=mat)
-            image_path.write_bytes(pix.tobytes("jpeg"))
+            image_path.write_bytes(pix.tobytes("jpeg", jpg_quality=IMAGE_QUALITY))
         image_paths.append(image_path)
     doc.close()
     return image_paths

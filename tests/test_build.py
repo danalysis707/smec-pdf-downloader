@@ -20,12 +20,16 @@ def test_convert_pdf_to_images_naming(tmp_path):
     if len(images) > 1:
         assert images[1].name == "page_002.jpg"
 
+@pytest.mark.skipif(not SAMPLE_PDF.exists(), reason="PDF not downloaded")
 def test_convert_pdf_to_images_skips_existing(tmp_path):
-    # 既存ファイルがある場合は変換をスキップして既存を返す
-    existing = tmp_path / "page_001.jpg"
-    existing.write_bytes(b"fake")
-    existing2 = tmp_path / "page_002.jpg"
-    existing2.write_bytes(b"fake")
-    # ダミーPDFなしで既存ファイルが返されることを確認
-    # (実際のPDFなしで存在チェックのみテスト)
-    assert existing.exists()
+    # First run: convert normally
+    images_first = convert_pdf_to_images(SAMPLE_PDF, tmp_path)
+    assert len(images_first) > 0
+    # Record modification times
+    mtimes_before = {img: img.stat().st_mtime for img in images_first}
+    # Second run: should skip all existing files
+    images_second = convert_pdf_to_images(SAMPLE_PDF, tmp_path)
+    assert len(images_second) == len(images_first)
+    # Files should not have been modified
+    for img in images_second:
+        assert img.stat().st_mtime == mtimes_before[img], f"{img.name} was overwritten"
