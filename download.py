@@ -4,6 +4,7 @@ from pathlib import Path
 
 BASE_URL = "https://www.jf-cmca.jp"
 TIMEOUT_SECONDS = 30
+SLEEP_SECONDS = 1
 
 YEARS = [
     ("r02", "2020", "令和2年度"),
@@ -81,7 +82,7 @@ def main():
             success += 1
         else:
             failure += 1
-        time.sleep(1)
+        time.sleep(SLEEP_SECONDS)
 
     print(f"\n=== 完了: 成功 {success} 件 / 失敗 {failure} 件 / 合計 {total} 件 ===")
 
