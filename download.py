@@ -54,3 +54,37 @@ def download_pdf(url: str, dest: Path) -> bool:
     except requests.RequestException as e:
         print(f"  エラー ({type(e).__name__}): {e}")
         return False
+
+
+def build_download_plan():
+    plan = []
+    for ryear, cyear, year_label in YEARS:
+        for subject, answer_letter, question_letter in SUBJECTS:
+            q_url = build_question_url(ryear, cyear, question_letter)
+            a_url = build_answer_url(ryear, cyear, answer_letter)
+            q_dest = OUTPUT_DIR / year_label / f"{subject}_問題.pdf"
+            a_dest = OUTPUT_DIR / year_label / f"{subject}_解答.pdf"
+            plan.append((year_label, subject, "問題", q_url, q_dest))
+            plan.append((year_label, subject, "解答", a_url, a_dest))
+    return plan
+
+
+def main():
+    plan = build_download_plan()
+    total = len(plan)
+    success, failure = 0, 0
+
+    print(f"ダウンロード開始: 全{total}件\n")
+    for i, (year_label, subject, kind, url, dest) in enumerate(plan, 1):
+        print(f"[{i}/{total}] {year_label} / {subject} ({kind})")
+        if download_pdf(url, dest):
+            success += 1
+        else:
+            failure += 1
+        time.sleep(1)
+
+    print(f"\n=== 完了: 成功 {success} 件 / 失敗 {failure} 件 / 合計 {total} 件 ===")
+
+
+if __name__ == "__main__":
+    main()

@@ -2,7 +2,7 @@ import pytest
 import requests
 from unittest.mock import patch, MagicMock
 from pathlib import Path
-from download import build_answer_url, build_question_url, download_pdf
+from download import build_answer_url, build_question_url, download_pdf, build_download_plan
 
 
 def test_build_answer_url():
@@ -84,3 +84,18 @@ def test_download_pdf_connection_error(tmp_path):
         result = download_pdf("https://example.com/down.pdf", dest)
         assert result is False
         assert not dest.exists()
+
+
+def test_build_download_plan_count():
+    plan = build_download_plan()
+    # 5年度 × 7科目 × 2種類（問題・解答）= 70件
+    assert len(plan) == 70
+
+
+def test_build_download_plan_entry_structure():
+    plan = build_download_plan()
+    year_label, subject, kind, url, dest = plan[0]
+    assert kind in ("問題", "解答")
+    assert url.startswith("https://")
+    assert url.endswith(".pdf")
+    assert isinstance(dest, Path)
