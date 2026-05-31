@@ -46,3 +46,25 @@ for pat in candidates:
             print(f"  [ERR] {url} -> {e}")
         time.sleep(0.3)
     print()
+
+print("=== 問題PDF 確認済みパターン検証 ===")
+verified_cases = [
+    # r02-r04: 小文字ji
+    ("r02", "2020", "ji"),
+    ("r03", "2021", "ji"),
+    ("r04", "2022", "ji"),
+    # r05-r06: 大文字JI
+    ("r05", "2023", "JI"),
+    ("r06", "2024", "JI"),
+]
+for ryear, cyear, ji_case in verified_cases:
+    for letter in ["A", "B", "C", "D", "E", "F", "G"]:
+        url = f"{BASE}/attach/test/shikenmondai/1ji{cyear}/{letter}1{ji_case}{cyear}.pdf"
+        try:
+            r = requests.head(url, timeout=10)
+            status = "HIT" if r.status_code == 200 else str(r.status_code)
+            print(f"  [{status}] {ryear} {letter}: {url}")
+        except Exception as e:
+            print(f"  [ERR] {ryear} {letter}: {e}")
+        time.sleep(0.3)
+    print()
