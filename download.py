@@ -3,6 +3,7 @@ import time
 from pathlib import Path
 
 BASE_URL = "https://www.jf-cmca.jp"
+TIMEOUT_SECONDS = 30
 
 YEARS = [
     ("r02", "2020", "令和2年度"),
@@ -24,8 +25,7 @@ SUBJECTS = [
 
 OUTPUT_DIR = Path("downloads")
 
-# r02-r04は小文字ji、r05-r06は大文字JI
-_QUESTION_JI = {"r02": "ji", "r03": "ji", "r04": "ji", "r05": "JI", "r06": "JI"}
+QUESTION_JI_MAP = {"r02": "ji", "r03": "ji", "r04": "ji", "r05": "JI", "r06": "JI"}
 
 
 def build_answer_url(ryear: str, cyear: str, letter: str) -> str:
@@ -33,7 +33,7 @@ def build_answer_url(ryear: str, cyear: str, letter: str) -> str:
 
 
 def build_question_url(ryear: str, cyear: str, letter: str) -> str:
-    ji = _QUESTION_JI[ryear]
+    ji = QUESTION_JI_MAP[ryear]
     return f"{BASE_URL}/attach/test/shikenmondai/1ji{cyear}/{letter}1{ji}{cyear}.pdf"
 
 
@@ -42,7 +42,7 @@ def download_pdf(url: str, dest: Path) -> bool:
         print(f"  スキップ（既存）: {dest.name}")
         return True
     try:
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, timeout=TIMEOUT_SECONDS)
         if response.status_code == 200:
             dest.parent.mkdir(parents=True, exist_ok=True)
             dest.write_bytes(response.content)
@@ -52,5 +52,5 @@ def download_pdf(url: str, dest: Path) -> bool:
             print(f"  失敗 ({response.status_code}): {url}")
             return False
     except requests.RequestException as e:
-        print(f"  エラー: {e}")
+        print(f"  エラー ({type(e).__name__}): {e}")
         return False

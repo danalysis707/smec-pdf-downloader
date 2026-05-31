@@ -1,4 +1,5 @@
 import pytest
+import requests
 from unittest.mock import patch, MagicMock
 from pathlib import Path
 from download import build_answer_url, build_question_url, download_pdf
@@ -48,6 +49,17 @@ def test_download_pdf_not_found(tmp_path):
         assert not dest.exists()
 
 
+def test_download_pdf_server_error(tmp_path):
+    mock_response = MagicMock()
+    mock_response.status_code = 500
+
+    with patch("download.requests.get", return_value=mock_response):
+        dest = tmp_path / "test.pdf"
+        result = download_pdf("https://example.com/error.pdf", dest)
+        assert result is False
+        assert not dest.exists()
+
+
 def test_download_pdf_skip_if_exists(tmp_path):
     dest = tmp_path / "existing.pdf"
     dest.write_bytes(b"already here")
@@ -56,3 +68,19 @@ def test_download_pdf_skip_if_exists(tmp_path):
         result = download_pdf("https://example.com/test.pdf", dest)
         mock_get.assert_not_called()
         assert result is True
+
+
+def test_download_pdf_timeout(tmp_path):
+    with patch("download.requests.get", side_effect=requests.Timeout("timed out")):
+        dest = tmp_path / "test.pdf"
+        result = download_pdf("https://example.com/slow.pdf", dest)
+        assert result is False
+        assert not dest.exists()
+
+
+def test_download_pdf_connection_error(tmp_path):
+    with patch("download.requests.get", side_effect=requests.ConnectionError("no connection")):
+        dest = tmp_path / "test.pdf"
+        result = download_pdf("https://example.com/down.pdf", dest)
+        assert result is False
+        assert not dest.exists()
