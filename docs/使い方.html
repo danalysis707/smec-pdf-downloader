@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中小企業診断士 PDFダウンローダー 実行手順</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+      background: #f5f7fa;
+      color: #2c3e50;
+      line-height: 1.7;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: #1a5276;
+      color: #fff;
+      border-radius: 10px;
+      padding: 32px 36px;
+      margin-bottom: 36px;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #2980b9;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-right: 6px;
+      vertical-align: middle;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 5px solid #2980b9;
+    }
+
+    .step h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: #2980b9;
+      color: #fff;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step p {
+      font-size: 0.95rem;
+      margin-bottom: 12px;
+      color: #444;
+    }
+
+    .step ul {
+      margin: 10px 0 10px 20px;
+      font-size: 0.93rem;
+      color: #444;
+    }
+
+    .step ul li {
+      margin-bottom: 4px;
+    }
+
+    pre {
+      background: #1e2d3d;
+      color: #a8d8ea;
+      border-radius: 7px;
+      padding: 16px 20px;
+      font-size: 0.88rem;
+      overflow-x: auto;
+      margin: 12px 0;
+      line-height: 1.6;
+    }
+
+    code {
+      background: #eaf0fb;
+      color: #1a5276;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.88em;
+      font-family: "Consolas", "Menlo", monospace;
+    }
+
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .note {
+      background: #fef9e7;
+      border: 1px solid #f0c040;
+      border-radius: 7px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #7d6608;
+      margin-top: 14px;
+    }
+
+    .note strong { color: #6e5900; }
+
+    .success {
+      background: #eafaf1;
+      border: 1px solid #58d68d;
+      border-radius: 7px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #1e8449;
+      margin-top: 14px;
+    }
+
+    .tree {
+      background: #1e2d3d;
+      color: #a8d8ea;
+      border-radius: 7px;
+      padding: 16px 20px;
+      font-family: "Consolas", "Menlo", monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      margin: 12px 0;
+    }
+
+    th {
+      background: #2980b9;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td {
+      padding: 9px 14px;
+      border-bottom: 1px solid #e0e7f0;
+      color: #333;
+    }
+
+    tr:nth-child(even) td { background: #f4f8fd; }
+
+    footer {
+      text-align: center;
+      font-size: 0.82rem;
+      color: #888;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>中小企業診断士 第1次試験 PDFダウンローダー</h1>
+    <p>実行手順書</p>
+    <p style="margin-top:12px;">
+      <span class="badge">全7科目</span>
+      <span class="badge">令和2〜7年度</span>
+      <span class="badge">問題・解答PDF</span>
+    </p>
+  </header>
+
+  <!-- Step 0: 必要なもの -->
+  <div class="step">
+    <h2><span class="step-num">0</span> 必要なもの（事前確認）</h2>
+    <p>以下がインストールされていることを確認してください。</p>
+    <table>
+      <tr><th>ソフトウェア</th><th>確認コマンド</th><th>推奨バージョン</th></tr>
+      <tr><td>Python</td><td><code>python --version</code></td><td>3.8 以上</td></tr>
+      <tr><td>pip</td><td><code>pip --version</code></td><td>Python に同梱</td></tr>
+      <tr><td>Git</td><td><code>git --version</code></td><td>任意</td></tr>
+    </table>
+    <div class="note">
+      <strong>注意:</strong> Python が入っていない場合は
+      <a href="https://www.python.org/downloads/" target="_blank">python.org</a>
+      からダウンロードしてインストールしてください。
+    </div>
+  </div>
+
+  <!-- Step 1: ダウンロード -->
+  <div class="step">
+    <h2><span class="step-num">1</span> スクリプトを取得する</h2>
+    <p><strong>方法A: Git でクローン（推奨）</strong></p>
+    <pre><code>git clone https://github.com/danalysis707/smec-pdf-downloader.git
+cd smec-pdf-downloader</code></pre>
+    <p><strong>方法B: ZIP でダウンロード</strong></p>
+    <p>
+      GitHub ページ右上の <code>Code ▼</code> → <code>Download ZIP</code> を選択し、
+      展開後にフォルダへ移動してください。
+    </p>
+  </div>
+
+  <!-- Step 2: ライブラリインストール -->
+  <div class="step">
+    <h2><span class="step-num">2</span> 必要なライブラリをインストールする</h2>
+    <p>プロジェクトフォルダ内で以下を実行します。</p>
+    <pre><code>pip install -r requirements.txt</code></pre>
+    <p>インストールされるライブラリ:</p>
+    <ul>
+      <li><code>requests</code> — HTTP 通信（PDF ダウンロード）</li>
+      <li><code>pytest</code> — テスト実行用（任意）</li>
+    </ul>
+    <div class="note">
+      <strong>仮想環境を使う場合（推奨）:</strong>
+      <pre style="margin-top:8px;"><code>python -m venv venv
+venv\Scripts\activate   # Windows
+pip install -r requirements.txt</code></pre>
+    </div>
+  </div>
+
+  <!-- Step 3: 実行 -->
+  <div class="step">
+    <h2><span class="step-num">3</span> ダウンロードを実行する</h2>
+    <pre><code>python download.py</code></pre>
+    <p>実行中は進捗が表示されます。</p>
+    <pre><code>ダウンロード開始: 全84件
+
+[1/84] 令和2年度 / 経済学・経済政策 (問題)
+  完了: 経済学・経済政策_問題.pdf
+[2/84] 令和2年度 / 経済学・経済政策 (解答)
+  完了: 経済学・経済政策_解答.pdf
+...
+=== 完了: 成功 84 件 / 失敗 0 件 / 合計 84 件 ===</code></pre>
+    <div class="note">
+      <strong>再実行は安全:</strong> 既にダウンロード済みのファイルはスキップされます。
+      <br>中断した場合もそのまま再実行すれば続きから取得できます。
+    </div>
+  </div>
+
+  <!-- Step 4: 結果確認 -->
+  <div class="step">
+    <h2><span class="step-num">4</span> ダウンロード結果を確認する</h2>
+    <p>実行後、<code>downloads/</code> フォルダに以下の構成で保存されます。</p>
+    <div class="tree">downloads/<br>
+├── 令和2年度/<br>
+│&nbsp;&nbsp; ├── 経済学・経済政策_問題.pdf<br>
+│&nbsp;&nbsp; ├── 経済学・経済政策_解答.pdf<br>
+│&nbsp;&nbsp; ├── 財務・会計_問題.pdf<br>
+│&nbsp;&nbsp; ├── 財務・会計_解答.pdf<br>
+│&nbsp;&nbsp; ├── 企業経営理論_問題.pdf<br>
+│&nbsp;&nbsp; ├── 企業経営理論_解答.pdf<br>
+│&nbsp;&nbsp; ├── 運営管理_問題.pdf<br>
+│&nbsp;&nbsp; ├── 運営管理_解答.pdf<br>
+│&nbsp;&nbsp; ├── 経営法務_問題.pdf<br>
+│&nbsp;&nbsp; ├── 経営法務_解答.pdf<br>
+│&nbsp;&nbsp; ├── 経営情報システム_問題.pdf<br>
+│&nbsp;&nbsp; ├── 経営情報システム_解答.pdf<br>
+│&nbsp;&nbsp; ├── 中小企業経営・中小企業政策_問題.pdf<br>
+│&nbsp;&nbsp; └── 中小企業経営・中小企業政策_解答.pdf<br>
+├── 令和3年度/<br>
+│&nbsp;&nbsp; └── （同上）<br>
+├── 令和4年度/<br>
+│&nbsp;&nbsp; └── （同上）<br>
+├── 令和5年度/<br>
+│&nbsp;&nbsp; └── （同上）<br>
+├── 令和6年度/<br>
+│&nbsp;&nbsp; └── （同上）<br>
+└── 令和7年度/<br>
+&nbsp;&nbsp;&nbsp;&nbsp; └── （同上）</div>
+    <div class="success">
+      <strong>84ファイル</strong>（6年度 × 7科目 × 2種類）を取得できます。
+    </div>
+  </div>
+
+  <!-- Step 5: テスト（任意） -->
+  <div class="step">
+    <h2><span class="step-num">5</span> テストを実行する（任意）</h2>
+    <p>動作確認のためにユニットテストを実行できます。</p>
+    <pre><code>pytest tests/ -v</code></pre>
+    <p>全 17 件のテストが通れば正常です。</p>
+<pre><code>17 passed in 0.76s</code></pre>
+  </div>
+
+  <!-- 科目一覧 -->
+  <div class="step" style="border-left-color: #27ae60;">
+    <h2><span class="step-num" style="background:#27ae60;">i</span> 対象科目・年度一覧</h2>
+    <table>
+      <tr><th>#</th><th>科目名</th></tr>
+      <tr><td>1</td><td>経済学・経済政策</td></tr>
+      <tr><td>2</td><td>財務・会計</td></tr>
+      <tr><td>3</td><td>企業経営理論</td></tr>
+      <tr><td>4</td><td>運営管理</td></tr>
+      <tr><td>5</td><td>経営法務</td></tr>
+      <tr><td>6</td><td>経営情報システム</td></tr>
+      <tr><td>7</td><td>中小企業経営・中小企業政策</td></tr>
+    </table>
+    <p style="margin-top:14px;">対象年度: <strong>令和2〜7年度</strong>（2020〜2025年）</p>
+    <p style="margin-top:6px; font-size:0.88rem; color:#666;">
+      ※ 令和5年度は再試験（さいし）の解答PDFを取得します。<br>
+      ※ 令和3・6・7年度の一部科目は公式訂正版ファイルを取得します。
+    </p>
+  </div>
+
+  <footer>
+    <p>ダウンロード元: jf-cmca.jp（日本中小企業診断士協会連合会）公開資料</p>
+  </footer>
+
+</div>
+</body>
+</html>
