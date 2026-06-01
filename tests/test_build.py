@@ -91,7 +91,7 @@ def test_assign_theme_company_law():
 
 def test_build_question_entry_structure():
     entry = build_question_entry(
-        ryear="r02", cyear="2020", year_label="令和2年度",
+        ryear="r02", year_label="令和2年度",
         subject="経済学・経済政策",
         question_number=1,
         pages=["images/r02/keizai/page_001.jpg"],
@@ -102,8 +102,10 @@ def test_build_question_entry_structure():
     assert entry["year"] == "r02"
     assert entry["year_label"] == "令和2年度"
     assert entry["subject"] == "経済学・経済政策"
+    assert entry["subject_short"] == "keizai"
     assert entry["question_number"] == 1
     assert entry["correct_answer"] == "ウ"
     assert entry["pages"] == ["images/r02/keizai/page_001.jpg"]
+    assert entry["answer_pages"] == ["images/r02/keizai_answer/page_001.jpg"]
     assert entry["search_query"] == "令和2年度 中小企業診断士 経済学・経済政策 第1問 解説"
-    assert "theme" in entry
+    assert isinstance(entry["theme"], str)

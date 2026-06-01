@@ -95,7 +95,7 @@ def extract_answers(answer_pdf_path: Path) -> dict[int, str]:
 
 
 def build_question_entry(
-    ryear: str, cyear: str, year_label: str,
+    ryear: str, year_label: str,
     subject: str, question_number: int,
     pages: list[str], correct_answer: str,
     answer_pages: list[str],
@@ -120,7 +120,6 @@ def build_question_entry(
 
 def build_quiz_data() -> list[dict]:
     """全年度・全科目を処理してquiz_dataエントリのリストを返す。"""
-    load_theme_keywords()
     questions = []
     for ryear, cyear, year_label in YEARS:
         for subject, answer_letter, question_letter in SUBJECTS:
@@ -154,7 +153,8 @@ def build_quiz_data() -> list[dict]:
             try:
                 with pdfplumber.open(str(q_pdf)) as pdf:
                     page_texts = [p.extract_text() or "" for p in pdf.pages]
-            except Exception:
+            except Exception as e:
+                print(f"  WARNING: テキスト抽出失敗 {q_pdf.name}: {e}")
                 page_texts = [""] * len(images)
 
             if not page_map:
@@ -167,9 +167,10 @@ def build_quiz_data() -> list[dict]:
                 q_text = " ".join(page_texts[p - 1] for p in q_page_nums if p - 1 < len(page_texts))
                 correct = answers.get(q_num, "")
                 entry = build_question_entry(
-                    ryear=ryear, cyear=cyear, year_label=year_label,
+                    ryear=ryear, year_label=year_label,
                     subject=subject, question_number=q_num,
                     pages=q_img_paths, correct_answer=correct,
+                    # 解答PDF全体が解答シートのため全問共通で1ページ目を使用
                     answer_pages=ans_paths[:1] if ans_paths else [],
                     question_text=q_text,
                 )
