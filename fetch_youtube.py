@@ -20,6 +20,8 @@ def fetch_channel_videos(channel_url: str) -> list[dict]:
         ],
         capture_output=True, text=True, encoding="utf-8",
     )
+    if result.returncode != 0:
+        print(f"  WARNING: yt-dlp exited {result.returncode}: {result.stderr[:200]}")
     videos = []
     for line in result.stdout.splitlines():
         if "\t" in line:
@@ -47,9 +49,11 @@ def main() -> None:
         videos = fetch_channel_videos(ch["url"])
         print(f"  {len(videos)} videos found")
         matched = 0
+        added = 0
         for video in videos:
             match = match_video_to_theme(video["title"], theme_keywords)
             if match:
+                matched += 1
                 subject, theme = match
                 bucket = result.setdefault(subject, {}).setdefault(theme, [])
                 if len(bucket) < MAX_VIDEOS_PER_THEME:
@@ -58,8 +62,8 @@ def main() -> None:
                         "url": video["url"],
                         "channel": ch["name"],
                     })
-                    matched += 1
-        print(f"  {matched} videos matched to themes")
+                    added += 1
+        print(f"  {matched} videos matched to themes, {added} added")
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(

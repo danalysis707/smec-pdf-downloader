@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from build import convert_pdf_to_images, detect_question_pages, extract_answers
+from build import convert_pdf_to_images, detect_question_pages, extract_answers, assign_theme
 
 SAMPLE_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_問題.pdf")
 SAMPLE_A_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_解答.pdf")
@@ -70,7 +70,6 @@ def test_extract_answers_r02_keizai_first_question():
     assert 1 in result
 
 
-from build import assign_theme
 
 def test_assign_theme_micro_economics():
     theme = assign_theme("需要曲線と供給曲線の均衡について", "経済学・経済政策")
