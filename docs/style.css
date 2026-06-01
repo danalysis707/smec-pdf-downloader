@@ -43,6 +43,17 @@ body {
   font-weight: 700;
 }
 
+/* Focus styles for keyboard navigation */
+.subject-btn:focus-visible,
+.chip:focus-visible,
+.start-btn:focus-visible,
+.ans-btn:focus-visible,
+.next-btn:focus-visible,
+.complete-btn:focus-visible {
+  outline: 3px solid var(--primary-light);
+  outline-offset: 2px;
+}
+
 /* Filter screen */
 .filter-header {
   background: var(--primary);
@@ -206,6 +217,7 @@ body {
 
 /* Complete screen */
 .complete-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 32px 16px; text-align: center; gap: 16px; }
+.complete-emoji { font-size: 3rem; }
 .score-display { font-size: 2rem; font-weight: 700; color: var(--primary); }
 .complete-btn { background: var(--primary); color: #fff; border: none; border-radius: 12px; padding: 14px 32px; font-size: 1rem; font-weight: 700; cursor: pointer; }
 .complete-btn.secondary { background: var(--card); color: var(--primary); border: 2px solid var(--primary); }

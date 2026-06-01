@@ -10,7 +10,7 @@
 
   <!-- 画面① 科目・テーマ・年度選択 -->
   <div id="screen-filter" class="screen active">
-    <div class="filter-header">中小企業診断士 1次試験 過去問</div>
+    <h1 class="filter-header">中小企業診断士 1次試験 過去問</h1>
     <div class="filter-body">
       <div class="filter-section">
         <h2>科目</h2>
@@ -43,10 +43,10 @@
       <div class="question-images" id="question-images"></div>
       <div id="answer-area">
         <div class="answer-buttons" id="answer-buttons"></div>
-        <a class="search-link" id="search-link-q" href="#" target="_blank">🔍 この問題を検索して解説を見る</a>
+        <a class="search-link" id="search-link-q" href="#" target="_blank" rel="noopener" aria-disabled="true">🔍 この問題を検索して解説を見る</a>
       </div>
       <div class="result-section hidden" id="result-section">
-        <div class="result-badge" id="result-badge"></div>
+        <div class="result-badge" id="result-badge" aria-live="polite"></div>
         <div class="answer-box">
           <div class="answer-item">
             <div class="answer-label">正解</div>
@@ -57,7 +57,7 @@
             <div class="answer-val" id="your-val"></div>
           </div>
         </div>
-        <a class="search-link" id="search-link-r" href="#" target="_blank">🔍 解説をネット検索</a>
+        <a class="search-link" id="search-link-r" href="#" target="_blank" rel="noopener" aria-disabled="true">🔍 解説をネット検索</a>
         <div id="youtube-links" class="hidden"></div>
         <div class="memo-section">
           <div class="memo-label">📝 メモ</div>
@@ -71,7 +71,7 @@
   <!-- 画面③ 完了 -->
   <div id="screen-complete" class="screen">
     <div class="complete-body">
-      <div style="font-size:3rem;">🎉</div>
+      <div class="complete-emoji">🎉</div>
       <h2>学習完了！</h2>
       <div class="score-display" id="final-score"></div>
       <button class="complete-btn" id="retry-btn">もう一度</button>
