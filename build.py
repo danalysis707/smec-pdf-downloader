@@ -92,3 +92,103 @@ def extract_answers(answer_pdf_path: Path) -> dict[int, str]:
             for match in re.finditer(r'(?<!\d)(\d{1,2})\s+([アイウエオ])(?!\w)', full_text):
                 answers[int(match.group(1))] = match.group(2)
     return answers
+
+
+def build_question_entry(
+    ryear: str, cyear: str, year_label: str,
+    subject: str, question_number: int,
+    pages: list[str], correct_answer: str,
+    answer_pages: list[str],
+    question_text: str = "",
+) -> dict:
+    """1問分のquiz_dataエントリを生成する。"""
+    subject_short = SUBJECT_SHORT[subject]
+    return {
+        "id": f"{ryear}_{subject_short}_q{question_number:03d}",
+        "year": ryear,
+        "year_label": year_label,
+        "subject": subject,
+        "subject_short": subject_short,
+        "question_number": question_number,
+        "theme": assign_theme(question_text, subject),
+        "pages": pages,
+        "correct_answer": correct_answer,
+        "answer_pages": answer_pages,
+        "search_query": f"{year_label} 中小企業診断士 {subject} 第{question_number}問 解説",
+    }
+
+
+def build_quiz_data() -> list[dict]:
+    """全年度・全科目を処理してquiz_dataエントリのリストを返す。"""
+    load_theme_keywords()
+    questions = []
+    for ryear, cyear, year_label in YEARS:
+        for subject, answer_letter, question_letter in SUBJECTS:
+            subject_short = SUBJECT_SHORT[subject]
+            q_pdf = OUTPUT_DIR / year_label / f"{year_label}_{subject}_問題.pdf"
+            a_pdf = OUTPUT_DIR / year_label / f"{year_label}_{subject}_解答.pdf"
+            if not q_pdf.exists():
+                print(f"  スキップ（PDF未存在）: {q_pdf.name}")
+                continue
+
+            # 画像変換
+            img_dir = IMAGES_DIR / ryear / subject_short
+            images = convert_pdf_to_images(q_pdf, img_dir)
+            img_paths = [str(p.relative_to(DOCS_DIR)).replace("\\", "/") for p in images]
+
+            # 解答画像変換
+            ans_dir = IMAGES_DIR / ryear / f"{subject_short}_answer"
+            ans_paths: list[str] = []
+            if a_pdf.exists():
+                ans_images = convert_pdf_to_images(a_pdf, ans_dir)
+                ans_paths = [str(p.relative_to(DOCS_DIR)).replace("\\", "/") for p in ans_images]
+
+            # 設問番号検出
+            page_map = detect_question_pages(q_pdf)
+
+            # 正解抽出
+            answers = extract_answers(a_pdf) if a_pdf.exists() else {}
+
+            # 問題テキスト取得（テーマ割り当て用）
+            page_texts: list[str] = []
+            try:
+                with pdfplumber.open(str(q_pdf)) as pdf:
+                    page_texts = [p.extract_text() or "" for p in pdf.pages]
+            except Exception:
+                page_texts = [""] * len(images)
+
+            if not page_map:
+                # 検出失敗時: 全ページを第1問として扱う
+                page_map = {i + 1: [i + 1] for i in range(len(images))}
+
+            for q_num in sorted(page_map.keys()):
+                q_page_nums = page_map[q_num]
+                q_img_paths = [img_paths[p - 1] for p in q_page_nums if p - 1 < len(img_paths)]
+                q_text = " ".join(page_texts[p - 1] for p in q_page_nums if p - 1 < len(page_texts))
+                correct = answers.get(q_num, "")
+                entry = build_question_entry(
+                    ryear=ryear, cyear=cyear, year_label=year_label,
+                    subject=subject, question_number=q_num,
+                    pages=q_img_paths, correct_answer=correct,
+                    answer_pages=ans_paths[:1] if ans_paths else [],
+                    question_text=q_text,
+                )
+                questions.append(entry)
+                print(f"  [{ryear}] {subject} 第{q_num}問 → {correct or '未取得'}")
+
+    return questions
+
+
+def main() -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    print("ビルド開始...\n")
+    questions = build_quiz_data()
+    out_path = DATA_DIR / "quiz_data.json"
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump({"questions": questions}, f, ensure_ascii=False, indent=2)
+    print(f"\n完了: {len(questions)}問 → {out_path}")
+
+
+if __name__ == "__main__":
+    main()

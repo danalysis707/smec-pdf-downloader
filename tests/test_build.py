@@ -1,6 +1,7 @@
 import pytest
 from pathlib import Path
 from build import convert_pdf_to_images, detect_question_pages, extract_answers, assign_theme
+from build import build_quiz_data, build_question_entry
 
 SAMPLE_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_問題.pdf")
 SAMPLE_A_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_解答.pdf")
@@ -86,3 +87,23 @@ def test_assign_theme_unknown_returns_other():
 def test_assign_theme_company_law():
     theme = assign_theme("株式会社の取締役の責任について", "経営法務")
     assert theme == "会社法"
+
+
+def test_build_question_entry_structure():
+    entry = build_question_entry(
+        ryear="r02", cyear="2020", year_label="令和2年度",
+        subject="経済学・経済政策",
+        question_number=1,
+        pages=["images/r02/keizai/page_001.jpg"],
+        correct_answer="ウ",
+        answer_pages=["images/r02/keizai_answer/page_001.jpg"],
+    )
+    assert entry["id"] == "r02_keizai_q001"
+    assert entry["year"] == "r02"
+    assert entry["year_label"] == "令和2年度"
+    assert entry["subject"] == "経済学・経済政策"
+    assert entry["question_number"] == 1
+    assert entry["correct_answer"] == "ウ"
+    assert entry["pages"] == ["images/r02/keizai/page_001.jpg"]
+    assert entry["search_query"] == "令和2年度 中小企業診断士 経済学・経済政策 第1問 解説"
+    assert "theme" in entry
