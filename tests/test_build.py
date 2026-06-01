@@ -3,7 +3,6 @@ from pathlib import Path
 from build import convert_pdf_to_images, detect_question_pages, extract_answers
 
 SAMPLE_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_問題.pdf")
-SAMPLE_Q_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_問題.pdf")
 SAMPLE_A_PDF = Path("downloads/令和2年度/令和2年度_経済学・経済政策_解答.pdf")
 
 @pytest.mark.skipif(not SAMPLE_PDF.exists(), reason="PDF not downloaded")
@@ -37,9 +36,9 @@ def test_convert_pdf_to_images_skips_existing(tmp_path):
         assert img.stat().st_mtime == mtimes_before[img], f"{img.name} was overwritten"
 
 
-@pytest.mark.skipif(not SAMPLE_Q_PDF.exists(), reason="PDF not downloaded")
+@pytest.mark.skipif(not SAMPLE_PDF.exists(), reason="PDF not downloaded")
 def test_detect_question_pages_returns_dict():
-    result = detect_question_pages(SAMPLE_Q_PDF)
+    result = detect_question_pages(SAMPLE_PDF)
     assert isinstance(result, dict)
     assert len(result) > 0
     for q_num, pages in result.items():
@@ -48,9 +47,9 @@ def test_detect_question_pages_returns_dict():
         assert all(isinstance(p, int) for p in pages)
 
 
-@pytest.mark.skipif(not SAMPLE_Q_PDF.exists(), reason="PDF not downloaded")
+@pytest.mark.skipif(not SAMPLE_PDF.exists(), reason="PDF not downloaded")
 def test_detect_question_pages_sequential():
-    result = detect_question_pages(SAMPLE_Q_PDF)
+    result = detect_question_pages(SAMPLE_PDF)
     q_nums = sorted(result.keys())
     assert q_nums[0] == 1
 

@@ -61,11 +61,12 @@ def extract_answers(answer_pdf_path: Path) -> dict[int, str]:
     answers: dict[int, str] = {}
     with pdfplumber.open(str(answer_pdf_path)) as pdf:
         full_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-    # パターン1: 「第1問　ウ」形式
-    for match in re.finditer(r'第\s*(\d+)\s*問\s*([アイウエオ])', full_text):
-        answers[int(match.group(1))] = match.group(2)
-    # パターン2: 表形式「1　ウ」形式（パターン1で取れなかった場合のフォールバック）
-    if not answers:
-        for match in re.finditer(r'(?<!\d)(\d{1,2})\s+([アイウエオ])(?!\w)', full_text):
+        # パターン1: 「第1問　ウ」形式
+        for match in re.finditer(r'第\s*(\d+)\s*問\s*([アイウエオ])', full_text):
             answers[int(match.group(1))] = match.group(2)
+        # パターン2: 表形式「1　ウ」形式（パターン1で取れなかった場合のフォールバック）
+        # 注: 境界アサーションで誤検出を抑制するが、PDFレイアウトによっては限界がある
+        if not answers:
+            for match in re.finditer(r'(?<!\d)(\d{1,2})\s+([アイウエオ])(?!\w)', full_text):
+                answers[int(match.group(1))] = match.group(2)
     return answers
