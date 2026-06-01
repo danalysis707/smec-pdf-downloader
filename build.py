@@ -1,3 +1,4 @@
+import json
 import re
 
 import fitz  # PyMuPDF
@@ -23,6 +24,27 @@ SUBJECT_SHORT = {
 IMAGE_DPI = 150
 IMAGE_QUALITY = 85
 PDF_BASE_DPI = 72  # PDF standard resolution in points
+
+THEME_KEYWORDS: dict[str, dict[str, list[str]]] = {}  # loaded from theme_map.json at runtime
+
+
+def load_theme_keywords() -> None:
+    """theme_map.json を読み込んで THEME_KEYWORDS を初期化する。"""
+    global THEME_KEYWORDS
+    theme_map_path = DATA_DIR / "theme_map.json"
+    with open(theme_map_path, encoding="utf-8") as f:
+        THEME_KEYWORDS = json.load(f)
+
+
+def assign_theme(question_text: str, subject: str) -> str:
+    """問題テキストのキーワードマッチングでテーマを返す。未マッチは'その他'。"""
+    if not THEME_KEYWORDS:
+        load_theme_keywords()
+    themes = THEME_KEYWORDS.get(subject, {})
+    for theme, keywords in themes.items():
+        if any(kw in question_text for kw in keywords):
+            return theme
+    return "その他"
 
 
 def convert_pdf_to_images(pdf_path: Path, output_dir: Path) -> list[Path]:

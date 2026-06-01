@@ -68,3 +68,22 @@ def test_extract_answers_returns_dict():
 def test_extract_answers_r02_keizai_first_question():
     result = extract_answers(SAMPLE_A_PDF)
     assert 1 in result
+
+
+from build import assign_theme
+
+def test_assign_theme_micro_economics():
+    theme = assign_theme("需要曲線と供給曲線の均衡について", "経済学・経済政策")
+    assert theme == "ミクロ経済学"
+
+def test_assign_theme_macro_economics():
+    theme = assign_theme("GDPと国民所得の関係について", "経済学・経済政策")
+    assert theme == "マクロ経済学"
+
+def test_assign_theme_unknown_returns_other():
+    theme = assign_theme("何も当てはまらない問題文", "経済学・経済政策")
+    assert theme == "その他"
+
+def test_assign_theme_company_law():
+    theme = assign_theme("株式会社の取締役の責任について", "経営法務")
+    assert theme == "会社法"
