@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>中小企業診断士 過去問クイズ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- 画面① 科目・テーマ・年度選択 -->
+  <div id="screen-filter" class="screen active">
+    <div class="filter-header">中小企業診断士 1次試験 過去問</div>
+    <div class="filter-body">
+      <div class="filter-section">
+        <h2>科目</h2>
+        <div class="subject-list" id="subject-list"></div>
+      </div>
+      <div class="filter-section" id="theme-section">
+        <h2>テーマ（複数選択可）</h2>
+        <div class="chip-list" id="theme-list"></div>
+      </div>
+      <div class="filter-section">
+        <h2>年度（複数選択可）</h2>
+        <div class="chip-list" id="year-list"></div>
+      </div>
+      <button class="start-btn" id="start-btn" disabled>科目を選択してください</button>
+    </div>
+  </div>
+
+  <!-- 画面② 問題表示・解答 -->
+  <div id="screen-question" class="screen">
+    <div class="source-bar">
+      <span class="source-tag" id="src-year"></span>
+      <span class="source-tag" id="src-subject"></span>
+      <span class="source-tag" id="src-qnum"></span>
+    </div>
+    <div class="q-body">
+      <div class="q-meta">
+        <span class="theme-badge" id="theme-badge"></span>
+        <span class="progress-text" id="progress-text"></span>
+      </div>
+      <div class="question-images" id="question-images"></div>
+      <div id="answer-area">
+        <div class="answer-buttons" id="answer-buttons"></div>
+        <a class="search-link" id="search-link-q" href="#" target="_blank">🔍 この問題を検索して解説を見る</a>
+      </div>
+      <div class="result-section hidden" id="result-section">
+        <div class="result-badge" id="result-badge"></div>
+        <div class="answer-box">
+          <div class="answer-item">
+            <div class="answer-label">正解</div>
+            <div class="answer-val" id="correct-val"></div>
+          </div>
+          <div class="answer-item">
+            <div class="answer-label">あなたの解答</div>
+            <div class="answer-val" id="your-val"></div>
+          </div>
+        </div>
+        <a class="search-link" id="search-link-r" href="#" target="_blank">🔍 解説をネット検索</a>
+        <div id="youtube-links" class="hidden"></div>
+        <div class="memo-section">
+          <div class="memo-label">📝 メモ</div>
+          <textarea class="memo-textarea" id="memo-text" placeholder="メモを入力…"></textarea>
+        </div>
+        <button class="next-btn" id="next-btn">次の問題へ →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 画面③ 完了 -->
+  <div id="screen-complete" class="screen">
+    <div class="complete-body">
+      <div style="font-size:3rem;">🎉</div>
+      <h2>学習完了！</h2>
+      <div class="score-display" id="final-score"></div>
+      <button class="complete-btn" id="retry-btn">もう一度</button>
+      <button class="complete-btn secondary" id="back-btn">科目選択に戻る</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
