@@ -15,7 +15,7 @@
 | 問題表示 | PDFページ画像をそのまま表示（図・表・数式含む） |
 | 出典表示 | 年度・科目名・設問番号を常時表示 |
 | テーマ分類 | 7科目 × 各5テーマ（手動定義） |
-| 解説 | 正解表示 ＋ Google検索リンク自動生成 ＋ ユーザーメモ |
+| 解説 | 正解表示 ＋ Google検索リンク ＋ テーマ一致YouTube動画リンク（特定動画） ＋ ユーザーメモ |
 | メモ機能 | 問題ごとにメモ記入・localStorage保存（永続） |
 | ホスティング | GitHub Pages（無料・どこでもアクセス可能） |
 | 著作権 | PDFは非公開リポジトリに保管、個人学習用途のみ |
@@ -28,6 +28,12 @@
 [ローカルPC - 初回のみ]
 downloads/（既存84 PDF）
     ↓
+fetch_youtube.py                         ← YouTubeデータ取得（yt-dlp使用）
+    ├─ youtube_config.json を読む（チャンネル定義）
+    ├─ yt-dlp で各チャンネルの動画タイトル+URLを取得
+    ├─ theme_map.json のキーワードで動画タイトルをマッチング
+    └─ docs/data/youtube_data.json を生成
+
 build.py
     ├─ PDF → JPEG画像変換（PyMuPDF）
     ├─ 解答PDF解析 → 正解JSON（pdfplumber）
@@ -40,6 +46,7 @@ https://danalysis707.github.io/smec-pdf-downloader
     ├─ index.html + app.js + style.css
     ├─ data/quiz_data.json
     ├─ data/theme_map.json
+    ├─ data/youtube_data.json            ← テーマ別マッチング済み動画一覧
     └─ images/{ryear}/{subject}/page_{NNN}.jpg
 ```
 
@@ -49,19 +56,20 @@ https://danalysis707.github.io/smec-pdf-downloader
 
 ```
 quiz/
-├── download.py          # 既存PDFダウンローダー
-├── build.py             # ビルドスクリプト（PDF→画像＋JSON）
-├── app/
-│   ├── index.html       # クイズアプリ本体
-│   ├── app.js           # 問題表示・解答ロジック・メモ管理
-│   └── style.css        # スマホ対応スタイル
-├── data/
-│   ├── quiz_data.json   # 全問題メタデータ
-│   └── theme_map.json   # テーマ分類定義
-├── images/              # 変換済みPDFページ画像
-│   └── r02/keizai/page_001.jpg ...
-├── downloads/           # gitignore済み（元PDF）
-└── docs/
+├── download.py             # 既存PDFダウンローダー
+├── build.py                # ビルドスクリプト（PDF→画像＋JSON）
+├── fetch_youtube.py        # YouTube動画データ取得スクリプト（yt-dlp使用）
+├── youtube_config.json     # YouTubeチャンネル定義（手動メンテ）
+├── docs/                   # GitHub Pages 公開ルート
+│   ├── index.html
+│   ├── app.js
+│   ├── style.css
+│   └── data/
+│       ├── quiz_data.json     # 全問題メタデータ（build.py生成）
+│       ├── theme_map.json     # テーマ分類定義
+│       └── youtube_data.json  # テーマ別動画一覧（fetch_youtube.py生成）
+├── downloads/              # gitignore済み（元PDF）
+└── requirements.txt
 ```
 
 ---
@@ -87,6 +95,54 @@ quiz/
       "search_query": "令和2年度 中小企業診断士 経済学 第1問 解説"
     }
   ]
+}
+```
+
+### youtube_config.json（手動メンテ・gitに含める）
+
+チャンネル定義ファイル。`fetch_youtube.py` の入力として使用する。
+
+```json
+{
+  "channels": [
+    {
+      "name": "はじめよう経済学",
+      "url": "https://www.youtube.com/@hajimeyou-keizaigaku"
+    },
+    {
+      "name": "ほらっちチャンネル",
+      "url": "https://www.youtube.com/@Horacchichannel"
+    },
+    {
+      "name": "たかぴーの中小企業診断士試験 攻略チャンネル",
+      "url": "https://www.youtube.com/@takapi-shindanshi"
+    }
+  ]
+}
+```
+
+### youtube_data.json（fetch_youtube.py 生成・gitに含める）
+
+`fetch_youtube.py` がチャンネルの全動画タイトルを `theme_map.json` のキーワードでマッチングして生成する。アプリは問題の `subject` + `theme` でこのJSONを引いて該当動画を表示する。
+
+```json
+{
+  "経済学・経済政策": {
+    "ミクロ経済学": [
+      {
+        "title": "需要曲線と供給曲線の基礎",
+        "url": "https://www.youtube.com/watch?v=XXXXXXXXX",
+        "channel": "はじめよう経済学"
+      },
+      {
+        "title": "需要の価格弾力性をわかりやすく解説",
+        "url": "https://www.youtube.com/watch?v=YYYYYYYYY",
+        "channel": "たかぴーの中小企業診断士試験 攻略チャンネル"
+      }
+    ],
+    "マクロ経済学": [...]
+  },
+  "財務・会計": { ... }
 }
 ```
 
@@ -179,8 +235,52 @@ quiz/
 - 正解記号・自分の解答を並べて表示
 - 「📄 解答PDFで確認」ボタン（解答ページ画像を表示）
 - 「🔍 解説をネット検索（令和4年 経済学 第3問）」ボタン
+- 📺 YouTube関連動画セクション（`youtube_data.json` から `subject` + `theme` で引いた動画を最大3件表示）  
+  表示形式: `📺 [動画タイトル]（[チャンネル名]）`（タップでYouTube動画を開く）  
+  例: `📺 需要曲線と供給曲線の基礎（はじめよう経済学）`  
+  　　`📺 ミクロ経済学 需要の弾力性（たかぴーの中小企業診断士試験 攻略チャンネル）`  
+  該当動画なしの場合はセクション自体を非表示にする。
 - 📝 メモ欄（テキストエリア）：入力内容はlocalStorageに自動保存
 - 「次の問題へ →」ボタン
+
+---
+
+## fetch_youtube.py 仕様
+
+### 処理フロー
+
+1. `youtube_config.json` からチャンネルURLを読み込む
+2. `docs/data/theme_map.json` からキーワード辞書を読み込む
+3. 各チャンネルに対して `yt-dlp --flat-playlist` で動画タイトル・URLを取得
+4. 各動画のタイトルに対して `theme_map.json` のキーワードでマッチング
+5. マッチした動画を `{subject: {theme: [{title, url, channel}]}}` 形式で集約
+6. `docs/data/youtube_data.json` に出力
+
+### キーワードマッチング
+
+`theme_map.json` と共通のキーワード辞書を使用する。動画タイトルに科目・テーマのキーワードが含まれれば、そのテーマに分類する。1つの動画が複数テーマにマッチした場合は最初にマッチしたテーマに分類する。
+
+```python
+def match_video_to_theme(title: str, theme_keywords: dict) -> tuple[str, str] | None:
+    """動画タイトルをキーワードマッチし (subject, theme) を返す。未マッチはNone。"""
+    for subject, themes in theme_keywords.items():
+        for theme, keywords in themes.items():
+            if any(kw in title for kw in keywords):
+                return subject, theme
+    return None
+```
+
+### 実行例
+
+```bash
+python fetch_youtube.py
+# Fetching: はじめよう経済学 ... 142 videos
+# Fetching: ほらっちチャンネル ... 87 videos
+# Fetching: たかぴーの中小企業診断士試験 攻略チャンネル ... 210 videos
+# Matched: 経済学・経済政策/ミクロ経済学 → 8 videos
+# ...
+# Done: docs/data/youtube_data.json (47 subjects/theme entries, 124 videos total)
+```
 
 ---
 
@@ -243,6 +343,7 @@ THEME_KEYWORDS = {
 | 進捗表示 | 正答数/出題数をリアルタイム更新 |
 | メモ保存 | `localStorage.setItem(questionId, memo)` |
 | 検索リンク | `https://www.google.com/search?q=${searchQuery}` |
+| YouTube動画リンク | `youtube_data.json` を init 時に fetch し、解答後に `question.subject` + `question.theme` で引いた動画を最大3件表示。マッチなしの場合は非表示。 |
 | 画像ズーム | CSS `touch-action: pinch-zoom` + max-width 100% |
 
 ### localStorage キー設計
@@ -269,7 +370,12 @@ result_{question_id} → 最終解答結果 (correct/wrong)
 ## デプロイ手順
 
 ```bash
-# 1. ビルド（初回 or PDF更新時）
+# 1. YouTube動画データ取得（初回 or チャンネル更新時）
+pip install yt-dlp
+python fetch_youtube.py
+# → docs/data/youtube_data.json を生成
+
+# 2. ビルド（初回 or PDF更新時）
 pip install pymupdf pdfplumber
 python build.py
 
