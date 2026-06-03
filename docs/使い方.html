@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>中小企業診断士 PDFダウンローダー 実行手順</title>
+  <title>中小企業診断士 過去問クイズ — 使い方</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,10 +15,7 @@
       padding: 40px 20px;
     }
 
-    .container {
-      max-width: 780px;
-      margin: 0 auto;
-    }
+    .container { max-width: 780px; margin: 0 auto; }
 
     header {
       background: #1a5276;
@@ -28,16 +25,8 @@
       margin-bottom: 36px;
     }
 
-    header h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    header p {
-      font-size: 0.95rem;
-      opacity: 0.85;
-    }
+    header h1 { font-size: 1.6rem; font-weight: 700; margin-bottom: 6px; }
+    header p { font-size: 0.95rem; opacity: 0.85; }
 
     .badge {
       display: inline-block;
@@ -50,19 +39,46 @@
       vertical-align: middle;
     }
 
-    .step {
+    .launch-btn {
+      display: inline-block;
+      margin-top: 18px;
+      background: #fff;
+      color: #1a5276;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .launch-btn:hover { opacity: 0.85; }
+
+    h2.section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a5276;
+      margin: 36px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d0dff0;
+    }
+
+    .card {
       background: #fff;
       border-radius: 10px;
-      padding: 28px 32px;
-      margin-bottom: 24px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.07);
       border-left: 5px solid #2980b9;
     }
 
-    .step h2 {
-      font-size: 1.1rem;
+    .card.green  { border-left-color: #27ae60; }
+    .card.orange { border-left-color: #e67e22; }
+    .card.gray   { border-left-color: #95a5a6; }
+
+    .card h3 {
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -72,40 +88,30 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 28px; height: 28px;
       background: #2980b9;
       color: #fff;
       border-radius: 50%;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       flex-shrink: 0;
     }
+    .card.green  .step-num { background: #27ae60; }
+    .card.orange .step-num { background: #e67e22; }
+    .card.gray   .step-num { background: #95a5a6; }
 
-    .step p {
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-      color: #444;
-    }
-
-    .step ul {
-      margin: 10px 0 10px 20px;
-      font-size: 0.93rem;
-      color: #444;
-    }
-
-    .step ul li {
-      margin-bottom: 4px;
-    }
+    .card p { font-size: 0.95rem; margin-bottom: 10px; color: #444; }
+    .card ul { margin: 8px 0 10px 20px; font-size: 0.93rem; color: #444; }
+    .card ul li { margin-bottom: 4px; }
 
     pre {
       background: #1e2d3d;
       color: #a8d8ea;
       border-radius: 7px;
-      padding: 16px 20px;
+      padding: 14px 18px;
       font-size: 0.88rem;
       overflow-x: auto;
-      margin: 12px 0;
+      margin: 10px 0;
       line-height: 1.6;
     }
 
@@ -118,74 +124,55 @@
       font-family: "Consolas", "Menlo", monospace;
     }
 
-    pre code {
-      background: none;
-      color: inherit;
-      padding: 0;
-      font-size: inherit;
-    }
+    pre code { background: none; color: inherit; padding: 0; font-size: inherit; }
 
     .note {
       background: #fef9e7;
       border: 1px solid #f0c040;
       border-radius: 7px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       font-size: 0.9rem;
       color: #7d6608;
-      margin-top: 14px;
+      margin-top: 12px;
     }
-
     .note strong { color: #6e5900; }
 
     .success {
       background: #eafaf1;
       border: 1px solid #58d68d;
       border-radius: 7px;
-      padding: 14px 18px;
+      padding: 12px 16px;
       font-size: 0.9rem;
       color: #1e8449;
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
     .tree {
       background: #1e2d3d;
       color: #a8d8ea;
       border-radius: 7px;
-      padding: 16px 20px;
+      padding: 14px 18px;
       font-family: "Consolas", "Menlo", monospace;
-      font-size: 0.88rem;
-      line-height: 1.8;
-      margin: 12px 0;
+      font-size: 0.87rem;
+      line-height: 1.9;
+      margin: 10px 0;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.9rem;
-      margin: 12px 0;
+      margin: 10px 0;
     }
-
-    th {
-      background: #2980b9;
-      color: #fff;
-      padding: 10px 14px;
-      text-align: left;
-      font-weight: 600;
-    }
-
-    td {
-      padding: 9px 14px;
-      border-bottom: 1px solid #e0e7f0;
-      color: #333;
-    }
-
+    th { background: #2980b9; color: #fff; padding: 9px 14px; text-align: left; font-weight: 600; }
+    td { padding: 8px 14px; border-bottom: 1px solid #e0e7f0; color: #333; }
     tr:nth-child(even) td { background: #f4f8fd; }
 
     footer {
       text-align: center;
       font-size: 0.82rem;
       color: #888;
-      margin-top: 40px;
+      margin-top: 48px;
     }
   </style>
 </head>
@@ -193,129 +180,71 @@
 <div class="container">
 
   <header>
-    <h1>中小企業診断士 第1次試験 PDFダウンローダー</h1>
-    <p>実行手順書</p>
+    <h1>中小企業診断士 1次試験 過去問クイズ</h1>
+    <p>使い方ガイド</p>
     <p style="margin-top:12px;">
       <span class="badge">全7科目</span>
       <span class="badge">令和2〜7年度</span>
-      <span class="badge">問題・解答PDF</span>
+      <span class="badge">1,199問</span>
+      <span class="badge">スマホ対応</span>
     </p>
+    <a class="launch-btn" href="index.html">▶ クイズを開始する</a>
   </header>
 
-  <!-- Step 0: 必要なもの -->
-  <div class="step">
-    <h2><span class="step-num">0</span> 必要なもの（事前確認）</h2>
-    <p>以下がインストールされていることを確認してください。</p>
-    <table>
-      <tr><th>ソフトウェア</th><th>確認コマンド</th><th>推奨バージョン</th></tr>
-      <tr><td>Python</td><td><code>python --version</code></td><td>3.8 以上</td></tr>
-      <tr><td>pip</td><td><code>pip --version</code></td><td>Python に同梱</td></tr>
-      <tr><td>Git</td><td><code>git --version</code></td><td>任意</td></tr>
-    </table>
-    <div class="note">
-      <strong>注意:</strong> Python が入っていない場合は
-      <a href="https://www.python.org/downloads/" target="_blank">python.org</a>
-      からダウンロードしてインストールしてください。
-    </div>
-  </div>
 
-  <!-- Step 1: ダウンロード -->
-  <div class="step">
-    <h2><span class="step-num">1</span> スクリプトを取得する</h2>
-    <p><strong>方法A: Git でクローン（推奨）</strong></p>
-    <pre><code>git clone https://github.com/danalysis707/smec-pdf-downloader.git
-cd smec-pdf-downloader</code></pre>
-    <p><strong>方法B: ZIP でダウンロード</strong></p>
-    <p>
-      GitHub ページ右上の <code>Code ▼</code> → <code>Download ZIP</code> を選択し、
-      展開後にフォルダへ移動してください。
-    </p>
-  </div>
+  <!-- ===== クイズアプリの使い方 ===== -->
+  <h2 class="section-title">クイズアプリの使い方</h2>
 
-  <!-- Step 2: ライブラリインストール -->
-  <div class="step">
-    <h2><span class="step-num">2</span> 必要なライブラリをインストールする</h2>
-    <p>プロジェクトフォルダ内で以下を実行します。</p>
-    <pre><code>pip install -r requirements.txt</code></pre>
-    <p>インストールされるライブラリ:</p>
+  <div class="card">
+    <h3><span class="step-num">1</span> 科目・テーマ・年度を選ぶ</h3>
+    <p>トップ画面で学習したい科目を選択します。</p>
     <ul>
-      <li><code>requests</code> — HTTP 通信（PDF ダウンロード）</li>
-      <li><code>pytest</code> — テスト実行用（任意）</li>
+      <li><strong>科目（必須）</strong> — 7科目から1つ選択</li>
+      <li><strong>テーマ（任意）</strong> — 科目内のテーマを複数選択可。未選択で全テーマ</li>
+      <li><strong>年度（任意）</strong> — 令和2〜7年度を複数選択可。未選択で全年度</li>
+    </ul>
+    <p>対象問題数が「▶ 学習開始（N問）」に表示されたら開始できます。</p>
+  </div>
+
+  <div class="card">
+    <h3><span class="step-num">2</span> 問題に解答する</h3>
+    <p>問題画像が表示されます。ア〜オのボタンをタップして解答してください。</p>
+    <ul>
+      <li>画面上部に年度・科目・問番号が表示されます</li>
+      <li>「🔍 この問題を検索して解説を見る」でGoogle検索へ飛べます</li>
+      <li>ピンチ操作で画像を拡大できます</li>
+    </ul>
+  </div>
+
+  <div class="card green">
+    <h3><span class="step-num">3</span> 正誤を確認する</h3>
+    <p>解答すると結果が表示されます。</p>
+    <ul>
+      <li>正解・あなたの解答を表示</li>
+      <li>「🔍 解説をネット検索」で該当問題の解説ページを検索</li>
+      <li>YouTube関連動画があれば自動表示（<a href="#youtube-section">要設定</a>）</li>
+      <li>📝 メモ欄に気づきを記録できます（端末に自動保存）</li>
+    </ul>
+  </div>
+
+  <div class="card green">
+    <h3><span class="step-num">4</span> 次の問題へ / 完了</h3>
+    <p>「次の問題へ →」で次へ進みます。全問終了すると正答率が表示されます。</p>
+    <ul>
+      <li>「もう一度」— 同じ問題セットをシャッフルして再挑戦</li>
+      <li>「科目選択に戻る」— フィルター画面に戻る</li>
     </ul>
     <div class="note">
-      <strong>仮想環境を使う場合（推奨）:</strong>
-      <pre style="margin-top:8px;"><code>python -m venv venv
-venv\Scripts\activate   # Windows
-pip install -r requirements.txt</code></pre>
+      <strong>メモは自動保存:</strong> 同じ問題を次回開いたときに復元されます（ブラウザのlocalStorageに保存）。
     </div>
   </div>
 
-  <!-- Step 3: 実行 -->
-  <div class="step">
-    <h2><span class="step-num">3</span> ダウンロードを実行する</h2>
-    <pre><code>python download.py</code></pre>
-    <p>実行中は進捗が表示されます。</p>
-    <pre><code>ダウンロード開始: 全84件
 
-[1/84] 令和2年度 / 経済学・経済政策 (問題)
-  完了: 経済学・経済政策_問題.pdf
-[2/84] 令和2年度 / 経済学・経済政策 (解答)
-  完了: 経済学・経済政策_解答.pdf
-...
-=== 完了: 成功 84 件 / 失敗 0 件 / 合計 84 件 ===</code></pre>
-    <div class="note">
-      <strong>再実行は安全:</strong> 既にダウンロード済みのファイルはスキップされます。
-      <br>中断した場合もそのまま再実行すれば続きから取得できます。
-    </div>
-  </div>
+  <!-- ===== 科目・年度一覧 ===== -->
+  <h2 class="section-title">対象科目・年度</h2>
 
-  <!-- Step 4: 結果確認 -->
-  <div class="step">
-    <h2><span class="step-num">4</span> ダウンロード結果を確認する</h2>
-    <p>実行後、<code>downloads/</code> フォルダに以下の構成で保存されます。</p>
-    <div class="tree">downloads/<br>
-├── 令和2年度/<br>
-│&nbsp;&nbsp; ├── 令和2年度_経済学・経済政策_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_経済学・経済政策_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_財務・会計_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_財務・会計_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_企業経営理論_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_企業経営理論_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_運営管理_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_運営管理_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_経営法務_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_経営法務_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_経営情報システム_問題.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_経営情報システム_解答.pdf<br>
-│&nbsp;&nbsp; ├── 令和2年度_中小企業経営・中小企業政策_問題.pdf<br>
-│&nbsp;&nbsp; └── 令和2年度_中小企業経営・中小企業政策_解答.pdf<br>
-├── 令和3年度/<br>
-│&nbsp;&nbsp; └── （同上）<br>
-├── 令和4年度/<br>
-│&nbsp;&nbsp; └── （同上）<br>
-├── 令和5年度/<br>
-│&nbsp;&nbsp; └── （同上）<br>
-├── 令和6年度/<br>
-│&nbsp;&nbsp; └── （同上）<br>
-└── 令和7年度/<br>
-&nbsp;&nbsp;&nbsp;&nbsp; └── （同上）</div>
-    <div class="success">
-      <strong>84ファイル</strong>（6年度 × 7科目 × 2種類）を取得できます。
-    </div>
-  </div>
-
-  <!-- Step 5: テスト（任意） -->
-  <div class="step">
-    <h2><span class="step-num">5</span> テストを実行する（任意）</h2>
-    <p>動作確認のためにユニットテストを実行できます。</p>
-    <pre><code>pytest tests/ -v</code></pre>
-    <p>全 17 件のテストが通れば正常です。</p>
-<pre><code>17 passed in 0.76s</code></pre>
-  </div>
-
-  <!-- 科目一覧 -->
-  <div class="step" style="border-left-color: #27ae60;">
-    <h2><span class="step-num" style="background:#27ae60;">i</span> 対象科目・年度一覧</h2>
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">i</span> 科目一覧</h3>
     <table>
       <tr><th>#</th><th>科目名</th></tr>
       <tr><td>1</td><td>経済学・経済政策</td></tr>
@@ -326,15 +255,122 @@ pip install -r requirements.txt</code></pre>
       <tr><td>6</td><td>経営情報システム</td></tr>
       <tr><td>7</td><td>中小企業経営・中小企業政策</td></tr>
     </table>
-    <p style="margin-top:14px;">対象年度: <strong>令和2〜7年度</strong>（2020〜2025年）</p>
+    <p style="margin-top:12px;">対象年度: <strong>令和2〜7年度</strong>（2020〜2025年）/ 全 <strong>1,199問</strong></p>
     <p style="margin-top:6px; font-size:0.88rem; color:#666;">
-      ※ 令和5年度は再試験（さいし）の解答PDFを取得します。<br>
-      ※ 令和3・6・7年度の一部科目は公式訂正版ファイルを取得します。
+      ※ 令和5年度は再試験の解答PDFを使用。<br>
+      ※ 令和3・6・7年度の一部科目は公式訂正版ファイルを使用。
     </p>
   </div>
 
+
+  <!-- ===== YouTube関連動画 ===== -->
+  <h2 class="section-title" id="youtube-section">YouTube関連動画を表示する（オプション）</h2>
+
+  <div class="card orange">
+    <h3><span class="step-num">1</span> yt-dlp をインストールする</h3>
+    <pre><code>pip install yt-dlp</code></pre>
+  </div>
+
+  <div class="card orange">
+    <h3><span class="step-num">2</span> fetch_youtube.py を実行する</h3>
+    <p>対応チャンネルから動画タイトルを取得し、テーマごとに分類します。</p>
+    <pre><code>python fetch_youtube.py</code></pre>
+    <p>完了すると <code>docs/data/youtube_data.json</code> が生成されます。</p>
+    <p>対応チャンネル（<code>youtube_config.json</code> で設定）:</p>
+    <ul>
+      <li>はじめよう経済学</li>
+      <li>ほらっちチャンネル</li>
+      <li>たかぴーの中小企業診断士試験 攻略チャンネル</li>
+    </ul>
+  </div>
+
+  <div class="card orange">
+    <h3><span class="step-num">3</span> デプロイする</h3>
+    <pre><code>git add docs/data/youtube_data.json
+git commit -m "feat: add youtube data"
+git push origin master</code></pre>
+    <div class="success">
+      数分後にクイズアプリの解答画面にYouTube関連動画リンクが表示されます。
+    </div>
+  </div>
+
+
+  <!-- ===== 開発者向け ===== -->
+  <h2 class="section-title">データ更新・再ビルド（開発者向け）</h2>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">0</span> 必要なもの</h3>
+    <table>
+      <tr><th>ソフトウェア</th><th>確認コマンド</th><th>推奨バージョン</th></tr>
+      <tr><td>Python</td><td><code>python --version</code></td><td>3.8 以上</td></tr>
+      <tr><td>Git</td><td><code>git --version</code></td><td>任意</td></tr>
+    </table>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">1</span> リポジトリをクローンする</h3>
+    <pre><code>git clone https://github.com/danalysis707/smec-pdf-downloader.git
+cd smec-pdf-downloader</code></pre>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">2</span> ライブラリをインストールする</h3>
+    <pre><code>pip install -r requirements.txt</code></pre>
+    <p>インストールされるライブラリ:</p>
+    <ul>
+      <li><code>requests</code> — PDF ダウンロード</li>
+      <li><code>PyMuPDF</code> — PDF→JPEG 変換</li>
+      <li><code>pdfplumber</code> — テキスト抽出・解答検出</li>
+      <li><code>pytest</code> — テスト実行</li>
+    </ul>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">3</span> PDFをダウンロードする</h3>
+    <pre><code>python download.py</code></pre>
+    <p><code>downloads/</code> に年度別・科目別で保存されます（問題・解答の合計84ファイル）。</p>
+    <div class="note">
+      <strong>再実行は安全:</strong> 既存ファイルはスキップされます。
+    </div>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">4</span> クイズデータ・画像を生成する</h3>
+    <pre><code>python build.py</code></pre>
+    <p>以下のファイルが生成されます:</p>
+    <div class="tree">docs/<br>
+├── data/<br>
+│&nbsp;&nbsp; ├── quiz_data.json&nbsp;&nbsp;← 問題メタデータ（1,199問）<br>
+│&nbsp;&nbsp; └── theme_map.json&nbsp;&nbsp;← テーマ・キーワード定義<br>
+└── images/<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ├── r02/keizai/page_001.jpg<br>
+&nbsp;&nbsp;&nbsp;&nbsp; ├── r02/keizai_answer/page_001.jpg<br>
+&nbsp;&nbsp;&nbsp;&nbsp; └── …（1,330枚）</div>
+    <div class="note">
+      <strong>再実行は安全:</strong> 既存の画像ファイルはスキップされます。
+    </div>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">5</span> デプロイする</h3>
+    <pre><code>git add docs/
+git commit -m "feat: update quiz data"
+git push origin master</code></pre>
+    <div class="success">
+      GitHub Pages（master ブランチの /docs）に自動反映されます。
+    </div>
+  </div>
+
+  <div class="card gray">
+    <h3><span class="step-num" style="background:#95a5a6;">6</span> テストを実行する（任意）</h3>
+    <pre><code>pytest tests/ -v</code></pre>
+    <pre><code>12 passed in X.XXs</code></pre>
+  </div>
+
+
   <footer>
     <p>ダウンロード元: jf-cmca.jp（日本中小企業診断士協会連合会）公開資料</p>
+    <p style="margin-top:4px;">GitHub: <a href="https://github.com/danalysis707/smec-pdf-downloader" target="_blank">danalysis707/smec-pdf-downloader</a></p>
   </footer>
 
 </div>
