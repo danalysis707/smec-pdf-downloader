@@ -262,6 +262,9 @@ function showResult(yourAnswer, q) {
   // Prev button in result section
   document.getElementById('result-prev-btn').classList.toggle('hidden', currentIndex === 0);
 
+  // やり直しボタン — 不正解・正解未取得のときのみ表示
+  document.getElementById('retry-q-btn').classList.toggle('hidden', isCorrect);
+
   const searchR = document.getElementById('search-link-r');
   searchR.href = `https://www.google.com/search?q=${encodeURIComponent(q.search_query)}`;
   searchR.removeAttribute('aria-disabled');
@@ -312,6 +315,10 @@ function prevQuestion() {
   }
 }
 
+function retryQuestion() {
+  renderQuestion();
+}
+
 function nextQuestion() {
   saveMemo();
   currentIndex++;
@@ -343,6 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   document.getElementById('next-btn').addEventListener('click', nextQuestion);
   document.getElementById('result-prev-btn').addEventListener('click', prevQuestion);
+  document.getElementById('retry-q-btn').addEventListener('click', retryQuestion);
   document.getElementById('memo-text').addEventListener('input', saveMemo);
   init();
 });
