@@ -1,0 +1,265 @@
+{
+  "description": "quiz_data.json から除外した設問の記録",
+  "total_excluded": 21,
+  "summary": {
+    "all_correct": 6,
+    "phantom_entry": 15
+  },
+  "excluded": [
+    {
+      "id": "r03_chusho_q022",
+      "year": "r03",
+      "year_label": "令和3年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 22,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    },
+    {
+      "id": "r03_chusho_q024",
+      "year": "r03",
+      "year_label": "令和3年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 24,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    },
+    {
+      "id": "r05_zaimu_q023",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "財務・会計",
+      "question_number": 23,
+      "pages": [
+        "images/r05/zaimu/page_018.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_keiei_q034",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "企業経営理論",
+      "question_number": 34,
+      "pages": [
+        "images/r05/keiei/page_034.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_keiei_q035",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "企業経営理論",
+      "question_number": 35,
+      "pages": [
+        "images/r05/keiei/page_035.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_keiei_q036",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "企業経営理論",
+      "question_number": 36,
+      "pages": [
+        "images/r05/keiei/page_037.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_keiei_q037",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "企業経営理論",
+      "question_number": 37,
+      "pages": [
+        "images/r05/keiei/page_039.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_joho_q021",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "経営情報システム",
+      "question_number": 21,
+      "pages": [
+        "images/r05/joho/page_022.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_joho_q022",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "経営情報システム",
+      "question_number": 22,
+      "pages": [
+        "images/r05/joho/page_023.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_joho_q023",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "経営情報システム",
+      "question_number": 23,
+      "pages": [
+        "images/r05/joho/page_024.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_joho_q024",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "経営情報システム",
+      "question_number": 24,
+      "pages": [
+        "images/r05/joho/page_025.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_joho_q025",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "経営情報システム",
+      "question_number": 25,
+      "pages": [
+        "images/r05/joho/page_026.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_chusho_q024",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 24,
+      "pages": [
+        "images/r05/chusho/page_028.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_chusho_q025",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 25,
+      "pages": [
+        "images/r05/chusho/page_029.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_chusho_q026",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 26,
+      "pages": [
+        "images/r05/chusho/page_030.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_chusho_q027",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 27,
+      "pages": [
+        "images/r05/chusho/page_031.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r05_chusho_q028",
+      "year": "r05",
+      "year_label": "令和5年度",
+      "subject": "中小企業経営・中小企業政策",
+      "question_number": 28,
+      "pages": [
+        "images/r05/chusho/page_033.jpg"
+      ],
+      "reason": "phantom_entry",
+      "reason_ja": "r05架空エントリ",
+      "detail": "令和5年度再試験PDFで問番号の自動検出が失敗したため、ページ番号を問番号として代用するフォールバック処理が動作した結果生成された架空エントリ。該当ページは問題ではなく、解答シートや白紙ページ等の可能性が高い。"
+    },
+    {
+      "id": "r06_unei_q013",
+      "year": "r06",
+      "year_label": "令和6年度",
+      "subject": "運営管理",
+      "question_number": 13,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    },
+    {
+      "id": "r06_joho_q019",
+      "year": "r06",
+      "year_label": "令和6年度",
+      "subject": "経営情報システム",
+      "question_number": 19,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    },
+    {
+      "id": "r07_unei_q033",
+      "year": "r07",
+      "year_label": "令和7年度",
+      "subject": "運営管理",
+      "question_number": 33,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    },
+    {
+      "id": "r07_joho_q012",
+      "year": "r07",
+      "year_label": "令和7年度",
+      "subject": "経営情報システム",
+      "question_number": 12,
+      "reason": "all_correct",
+      "reason_ja": "全員正解扱い",
+      "detail": "試験実施上の問題により全受験者に得点が付与された設問。解答PDFの正解欄が「-」であり、特定の正解記号が存在しない。"
+    }
+  ]
+}

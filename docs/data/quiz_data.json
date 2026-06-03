@@ -6631,23 +6631,6 @@
       "search_query": "令和3年度 中小企業診断士 中小企業経営・中小企業政策 第21問 解説"
     },
     {
-      "id": "r03_chusho_q022",
-      "year": "r03",
-      "year_label": "令和3年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 22,
-      "theme": "その他",
-      "pages": [
-        "images/r03/chusho/page_026.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r03/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和3年度 中小企業診断士 中小企業経営・中小企業政策 第22問 解説"
-    },
-    {
       "id": "r03_chusho_q023",
       "year": "r03",
       "year_label": "令和3年度",
@@ -6663,23 +6646,6 @@
         "images/r03/chusho_answer/page_001.jpg"
       ],
       "search_query": "令和3年度 中小企業診断士 中小企業経営・中小企業政策 第23問 解説"
-    },
-    {
-      "id": "r03_chusho_q024",
-      "year": "r03",
-      "year_label": "令和3年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 24,
-      "theme": "中小企業政策・支援制度",
-      "pages": [
-        "images/r03/chusho/page_030.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r03/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和3年度 中小企業診断士 中小企業経営・中小企業政策 第24問 解説"
     },
     {
       "id": "r03_chusho_q025",
@@ -10915,23 +10881,6 @@
       "search_query": "令和5年度 中小企業診断士 財務・会計 第22問 解説"
     },
     {
-      "id": "r05_zaimu_q023",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "財務・会計",
-      "subject_short": "zaimu",
-      "question_number": 23,
-      "theme": "その他",
-      "pages": [
-        "images/r05/zaimu/page_018.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/zaimu_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 財務・会計 第23問 解説"
-    },
-    {
       "id": "r05_keiei_q001",
       "year": "r05",
       "year_label": "令和5年度",
@@ -11491,74 +11440,6 @@
         "images/r05/keiei_answer/page_001.jpg"
       ],
       "search_query": "令和5年度 中小企業診断士 企業経営理論 第33問 解説"
-    },
-    {
-      "id": "r05_keiei_q034",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "企業経営理論",
-      "subject_short": "keiei",
-      "question_number": 34,
-      "theme": "マーケティング",
-      "pages": [
-        "images/r05/keiei/page_034.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/keiei_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 企業経営理論 第34問 解説"
-    },
-    {
-      "id": "r05_keiei_q035",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "企業経営理論",
-      "subject_short": "keiei",
-      "question_number": 35,
-      "theme": "マーケティング",
-      "pages": [
-        "images/r05/keiei/page_035.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/keiei_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 企業経営理論 第35問 解説"
-    },
-    {
-      "id": "r05_keiei_q036",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "企業経営理論",
-      "subject_short": "keiei",
-      "question_number": 36,
-      "theme": "マーケティング",
-      "pages": [
-        "images/r05/keiei/page_037.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/keiei_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 企業経営理論 第36問 解説"
-    },
-    {
-      "id": "r05_keiei_q037",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "企業経営理論",
-      "subject_short": "keiei",
-      "question_number": 37,
-      "theme": "組織論・人的資源管理",
-      "pages": [
-        "images/r05/keiei/page_039.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/keiei_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 企業経営理論 第37問 解説"
     },
     {
       "id": "r05_unei_q001",
@@ -12938,91 +12819,6 @@
       "search_query": "令和5年度 中小企業診断士 経営情報システム 第20問 解説"
     },
     {
-      "id": "r05_joho_q021",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 21,
-      "theme": "ネットワーク・セキュリティ",
-      "pages": [
-        "images/r05/joho/page_022.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 経営情報システム 第21問 解説"
-    },
-    {
-      "id": "r05_joho_q022",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 22,
-      "theme": "ネットワーク・セキュリティ",
-      "pages": [
-        "images/r05/joho/page_023.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 経営情報システム 第22問 解説"
-    },
-    {
-      "id": "r05_joho_q023",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 23,
-      "theme": "ハードウェア・OS基礎",
-      "pages": [
-        "images/r05/joho/page_024.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 経営情報システム 第23問 解説"
-    },
-    {
-      "id": "r05_joho_q024",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 24,
-      "theme": "統計・データ分析",
-      "pages": [
-        "images/r05/joho/page_025.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 経営情報システム 第24問 解説"
-    },
-    {
-      "id": "r05_joho_q025",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 25,
-      "theme": "その他",
-      "pages": [
-        "images/r05/joho/page_026.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 経営情報システム 第25問 解説"
-    },
-    {
       "id": "r05_chusho_q001",
       "year": "r05",
       "year_label": "令和5年度",
@@ -13412,91 +13208,6 @@
         "images/r05/chusho_answer/page_001.jpg"
       ],
       "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第23問 解説"
-    },
-    {
-      "id": "r05_chusho_q024",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 24,
-      "theme": "その他",
-      "pages": [
-        "images/r05/chusho/page_028.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第24問 解説"
-    },
-    {
-      "id": "r05_chusho_q025",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 25,
-      "theme": "中小企業政策・支援制度",
-      "pages": [
-        "images/r05/chusho/page_029.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第25問 解説"
-    },
-    {
-      "id": "r05_chusho_q026",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 26,
-      "theme": "その他",
-      "pages": [
-        "images/r05/chusho/page_030.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第26問 解説"
-    },
-    {
-      "id": "r05_chusho_q027",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 27,
-      "theme": "事業承継・M&A",
-      "pages": [
-        "images/r05/chusho/page_031.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第27問 解説"
-    },
-    {
-      "id": "r05_chusho_q028",
-      "year": "r05",
-      "year_label": "令和5年度",
-      "subject": "中小企業経営・中小企業政策",
-      "subject_short": "chusho",
-      "question_number": 28,
-      "theme": "中小企業政策・支援制度",
-      "pages": [
-        "images/r05/chusho/page_033.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r05/chusho_answer/page_001.jpg"
-      ],
-      "search_query": "令和5年度 中小企業診断士 中小企業経営・中小企業政策 第28問 解説"
     },
     {
       "id": "r06_keizai_q001",
@@ -15165,23 +14876,6 @@
       "search_query": "令和6年度 中小企業診断士 運営管理 第12問 解説"
     },
     {
-      "id": "r06_unei_q013",
-      "year": "r06",
-      "year_label": "令和6年度",
-      "subject": "運営管理",
-      "subject_short": "unei",
-      "question_number": 13,
-      "theme": "生産管理・IE",
-      "pages": [
-        "images/r06/unei/page_014.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r06/unei_answer/page_001.jpg"
-      ],
-      "search_query": "令和6年度 中小企業診断士 運営管理 第13問 解説"
-    },
-    {
       "id": "r06_unei_q014",
       "year": "r06",
       "year_label": "令和6年度",
@@ -16404,23 +16098,6 @@
         "images/r06/joho_answer/page_001.jpg"
       ],
       "search_query": "令和6年度 中小企業診断士 経営情報システム 第18問 解説"
-    },
-    {
-      "id": "r06_joho_q019",
-      "year": "r06",
-      "year_label": "令和6年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 19,
-      "theme": "ネットワーク・セキュリティ",
-      "pages": [
-        "images/r06/joho/page_021.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r06/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和6年度 中小企業診断士 経営情報システム 第19問 解説"
     },
     {
       "id": "r06_joho_q020",
@@ -18888,23 +18565,6 @@
       "search_query": "令和7年度 中小企業診断士 運営管理 第32問 解説"
     },
     {
-      "id": "r07_unei_q033",
-      "year": "r07",
-      "year_label": "令和7年度",
-      "subject": "運営管理",
-      "subject_short": "unei",
-      "question_number": 33,
-      "theme": "在庫管理・SCM",
-      "pages": [
-        "images/r07/unei/page_031.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r07/unei_answer/page_001.jpg"
-      ],
-      "search_query": "令和7年度 中小企業診断士 運営管理 第33問 解説"
-    },
-    {
       "id": "r07_unei_q034",
       "year": "r07",
       "year_label": "令和7年度",
@@ -19634,23 +19294,6 @@
         "images/r07/joho_answer/page_001.jpg"
       ],
       "search_query": "令和7年度 中小企業診断士 経営情報システム 第11問 解説"
-    },
-    {
-      "id": "r07_joho_q012",
-      "year": "r07",
-      "year_label": "令和7年度",
-      "subject": "経営情報システム",
-      "subject_short": "joho",
-      "question_number": 12,
-      "theme": "その他",
-      "pages": [
-        "images/r07/joho/page_013.jpg"
-      ],
-      "correct_answer": "",
-      "answer_pages": [
-        "images/r07/joho_answer/page_001.jpg"
-      ],
-      "search_query": "令和7年度 中小企業診断士 経営情報システム 第12問 解説"
     },
     {
       "id": "r07_joho_q013",
