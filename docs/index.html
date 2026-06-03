@@ -31,6 +31,7 @@
   <!-- 画面② 問題表示・解答 -->
   <div id="screen-question" class="screen">
     <div class="source-bar">
+      <button class="menu-back-btn" id="menu-btn">← メニュー</button>
       <span class="source-tag" id="src-year"></span>
       <span class="source-tag" id="src-subject"></span>
       <span class="source-tag" id="src-qnum"></span>
@@ -42,7 +43,9 @@
       </div>
       <div class="question-images" id="question-images"></div>
       <div id="answer-area">
+        <p class="answer-prompt" id="answer-prompt"></p>
         <div class="answer-buttons" id="answer-buttons"></div>
+        <button class="prev-btn hidden" id="prev-btn">← 前の問題</button>
         <a class="search-link" id="search-link-q" href="#" target="_blank" rel="noopener" aria-disabled="true">🔍 この問題を検索して解説を見る</a>
       </div>
       <div class="result-section hidden" id="result-section">

@@ -191,6 +191,13 @@ function renderQuestion() {
     imgContainer.textContent = '（画像なし）';
   }
 
+  // Answer prompt label
+  document.getElementById('answer-prompt').textContent =
+    `第${q.question_number}問の解答を選んでください`;
+
+  // Prev button — visible only when not on first question
+  document.getElementById('prev-btn').classList.toggle('hidden', currentIndex === 0);
+
   // Answer buttons (ア〜オ) — use createElement to avoid global onclick
   const btns = document.getElementById('answer-buttons');
   btns.innerHTML = '';
@@ -274,6 +281,7 @@ function showResult(yourAnswer, q) {
     ytContainer.classList.add('hidden');
   }
 
+  document.getElementById('prev-btn').classList.add('hidden');
   document.getElementById('answer-area').classList.add('hidden');
   document.getElementById('result-section').classList.remove('hidden');
 }
@@ -286,6 +294,13 @@ function saveMemo() {
     localStorage.setItem(`memo_${q.id}`, text);
   } else {
     localStorage.removeItem(`memo_${q.id}`);
+  }
+}
+
+function prevQuestion() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    renderQuestion();
   }
 }
 
@@ -308,6 +323,8 @@ function showComplete() {
 // ── Boot ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('start-btn').addEventListener('click', startQuiz);
+  document.getElementById('menu-btn').addEventListener('click', () => showScreen('screen-filter'));
+  document.getElementById('prev-btn').addEventListener('click', prevQuestion);
   document.getElementById('back-btn').addEventListener('click', () => showScreen('screen-filter'));
   document.getElementById('retry-btn').addEventListener('click', () => {
     currentIndex = 0;
