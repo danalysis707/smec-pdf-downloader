@@ -231,7 +231,7 @@ function submitAnswer(choice) {
   });
 
   const q = sessionQuestions[currentIndex];
-  const isCorrect = choice === q.correct_answer;
+  const isCorrect = !!q.correct_answer && choice === q.correct_answer;
   if (isCorrect) sessionCorrect++;
 
   localStorage.setItem(`result_${q.id}`, JSON.stringify({
@@ -248,11 +248,19 @@ function showResult(yourAnswer, q) {
   const isCorrect = yourAnswer === q.correct_answer;
 
   const badge = document.getElementById('result-badge');
-  badge.textContent = isCorrect ? '⭕ 正解！' : '❌ 不正解';
-  badge.className = `result-badge ${isCorrect ? 'correct' : 'wrong'}`;
+  if (!q.correct_answer) {
+    badge.textContent = '📋 正解を確認（解答PDFから取得できませんでした）';
+    badge.className = 'result-badge unknown';
+  } else {
+    badge.textContent = isCorrect ? '⭕ 正解！' : '❌ 不正解';
+    badge.className = `result-badge ${isCorrect ? 'correct' : 'wrong'}`;
+  }
 
-  document.getElementById('correct-val').textContent = q.correct_answer || '未取得';
+  document.getElementById('correct-val').textContent = q.correct_answer || '（未取得）';
   document.getElementById('your-val').textContent = yourAnswer;
+
+  // Prev button in result section
+  document.getElementById('result-prev-btn').classList.toggle('hidden', currentIndex === 0);
 
   const searchR = document.getElementById('search-link-r');
   searchR.href = `https://www.google.com/search?q=${encodeURIComponent(q.search_query)}`;
@@ -334,6 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderQuestion();
   });
   document.getElementById('next-btn').addEventListener('click', nextQuestion);
+  document.getElementById('result-prev-btn').addEventListener('click', prevQuestion);
   document.getElementById('memo-text').addEventListener('input', saveMemo);
   init();
 });

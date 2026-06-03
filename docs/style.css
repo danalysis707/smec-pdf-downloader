@@ -166,6 +166,7 @@ body {
 }
 .result-badge.correct { background: #eafaf1; color: var(--success); }
 .result-badge.wrong { background: #fdedec; color: var(--danger); }
+.result-badge.unknown { background: #f4f6f7; color: var(--muted); }
 .answer-box {
   background: var(--card);
   border-radius: 10px;
