@@ -1,5 +1,6 @@
 import json
 import re
+import unicodedata
 
 import fitz  # PyMuPDF
 import pdfplumber
@@ -82,15 +83,26 @@ def extract_answers(answer_pdf_path: Path) -> dict[int, str]:
     """解答PDFから {問題番号: 正解記号} を抽出する。"""
     answers: dict[int, str] = {}
     with pdfplumber.open(str(answer_pdf_path)) as pdf:
-        full_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
-        # パターン1: 「第1問　ウ」形式
-        for match in re.finditer(r'第\s*(\d+)\s*問\s*([アイウエオ])', full_text):
-            answers[int(match.group(1))] = match.group(2)
-        # パターン2: 表形式「1　ウ」形式（パターン1で取れなかった場合のフォールバック）
-        # 注: 境界アサーションで誤検出を抑制するが、PDFレイアウトによっては限界がある
-        if not answers:
-            for match in re.finditer(r'(?<!\d)(\d{1,2})\s+([アイウエオ])(?!\w)', full_text):
-                answers[int(match.group(1))] = match.group(2)
+        raw_text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+    # 全角数字・記号を半角に正規化して regex マッチを確実にする
+    full_text = unicodedata.normalize('NFKC', raw_text)
+    def fill(pattern: str) -> None:
+        """マッチした問題番号のうち未取得のものだけ answers に追加する。"""
+        for m in re.finditer(pattern, full_text):
+            q_num = int(m.group(1))
+            if q_num not in answers:
+                answers[q_num] = m.group(2)
+
+    # パターン1: 標準形式「第N問 (-|設問N) 正解 配点」
+    fill(r'第\s*(\d+)\s*問\s+(?:-|設問\d+)\s+\*?([アイウエオ])')
+    # パターン2: r05形式「第N問 (-|設問N) 配点 正解」（令和5年度は列順が逆）
+    fill(r'第\s*(\d+)\s*問\s+(?:-|設問\d+)\s+\d+\s+\*?([アイウエオ])')
+    # パターン3: r05形式「第N問 配点 正解」（設問区切りなし）
+    fill(r'第\s*(\d+)\s*問\s+\d+\s+\*?([アイウエオ])')
+    # パターン4: 直接形式「第N問 正解」
+    fill(r'第\s*(\d+)\s*問\s+\*?([アイウエオ])')
+    # パターン5: 表形式フォールバック「N 正解」
+    fill(r'(?<!\d)(\d{1,2})\s+\*?([アイウエオ])(?!\w)')
     return answers
 
 
